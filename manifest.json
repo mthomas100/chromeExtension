@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Top Posts Viewer",
     "version": "2.0",
-    "description": "Launch a new tab with top posts from any subreddit.",
+    "description": "Launch a new tab with top posts from any subreddit. (DELETE THIS)",
     "permissions": [
         "contextMenus",
         "tabs"
