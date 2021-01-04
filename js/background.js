@@ -1,37 +1,41 @@
 chrome.contextMenus.create({
   title: "View Top Posts From This Subreddit",
-  contexts: ["selection"],
+  contexts: ["page"],
   onclick: printCurrentTab()
 });
 
 function printCurrentTab() {
-  return function(tab) {
+  return function(info, tab) {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
       let meetUrl = tabs[0].url;
-      switchUser(meetUrl);
+      const newMeetUrl = switchUser(meetUrl);
+      chrome.tabs.create({
+        index: tab.index + 1,
+        url: newMeetUrl,
+        selected: true
+      });
     });
   };
 }
 
-function switchUser(url) {}
+function switchUser(meetUrl) {
+  const authStartIndex = meetUrl.indexOf("authuser");
+  const authEndIndex = authStartIndex + 10;
 
-function switchAccount() {
-  return function(info, tab) {
-    let text = info.selectionText;
-    let redditLink = "https://www.reddit.com/" + format(text) + "/top/?t=all";
-    chrome.tabs.create({
-      index: tab.index + 1,
-      url: redditLink,
-      selected: true
-    });
-  };
-}
+  //Get what's before authLink
+  const beforeAuthLink = meetUrl
+    .split("")
+    .slice(0, authStartIndex)
+    .join("");
+  //Get authlink
+  let authLink = meetUrl
+    .split("")
+    .slice(authStartIndex, authEndIndex)
+    .join("");
 
-function format(subName) {
-  // If selected text begins with "r/"
-  if (subName[0] === "r" && subName[1] === "/") {
-    return subName;
-  } else {
-    return "r/" + subName;
-  }
+  authLink = "authuser=0";
+
+  const newMeetUrl = beforeAuthLink.concat(authLink);
+
+  return newMeetUrl;
 }
