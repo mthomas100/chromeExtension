@@ -24,10 +24,3 @@ function format(subName) {
     return "r/" + subName;
   }
 }
-
-function deleteThisToo() {
-  return;
-}
-function deleteThis() {
-  return;
-}
