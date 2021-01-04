@@ -1,6 +1,5 @@
 chrome.contextMenus.create({
-  title: "View Top Posts From This Subreddit",
-  contexts: ["page"],
+  title: "Switch Google Account",
   onclick: printCurrentTab()
 });
 
@@ -33,7 +32,9 @@ function switchUser(meetUrl) {
     .slice(authStartIndex, authEndIndex)
     .join("");
 
-  authLink = "authuser=0";
+  if (authLink == "authuser=1") {
+    authLink = "authuser=0";
+  } else authLink = "authuser=1";
 
   const newMeetUrl = beforeAuthLink.concat(authLink);
 
