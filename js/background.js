@@ -1,8 +1,19 @@
 chrome.contextMenus.create({
   title: "View Top Posts From This Subreddit",
   contexts: ["selection"],
-  onclick: switchAccount()
+  onclick: printCurrentTab()
 });
+
+function printCurrentTab() {
+  return function(tab) {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+      let meetUrl = tabs[0].url;
+      switchUser(meetUrl);
+    });
+  };
+}
+
+function switchUser(url) {}
 
 function switchAccount() {
   return function(info, tab) {
