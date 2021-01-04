@@ -25,6 +25,12 @@ function format(subName) {
   }
 }
 
+<<<<<<< HEAD
 function deleteThisToo() {
   return;
 }
+=======
+function deleteThis() {
+  return;
+}
+>>>>>>> e66fedcadc8129d1517be96388f5ace3cb7b70db
