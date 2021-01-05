@@ -8,10 +8,9 @@ function printCurrentTab() {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
       let meetUrl = tabs[0].url;
       const newMeetUrl = switchUser(meetUrl);
-      chrome.tabs.create({
-        index: tab.index + 1,
-        url: newMeetUrl,
-        selected: true
+      console.log(newMeetUrl);
+      chrome.tabs.update({
+        url: newMeetUrl
       });
     });
   };
@@ -36,7 +35,7 @@ function switchUser(meetUrl) {
     authLink = "authuser=0";
   } else authLink = "authuser=1";
 
-  const newMeetUrl = beforeAuthLink.concat(authLink);
+  const newMeetUrl = beforeAuthLink.concat('?').concat(authLink);
 
   return newMeetUrl;
 }
