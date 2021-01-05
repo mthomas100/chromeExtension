@@ -29,39 +29,71 @@
 
 // handleMeetLink(meetLink);
 
-const currentMeetLink = 'https://meet.google.com/pbx-wmab-hij?authuser=1';
-const notCurrentMeetLink = 'https://www.google.com';
-const specifiedAuthLink = 'authuser=1';
+// const currentMeetLink = 'https://meet.google.com/pbx-wmab-hij?authuser=1';
+// const notCurrentMeetLink = 'https://www.google.com';
+// const specifiedAuthLink = 'authuser=1';
 
-function containsCurrentMeetLink(meetUrl) {
-    return meetUrl.startsWith('https://meet.google.com');
-}
+// function containsCurrentMeetLink(meetUrl) {
+//     return meetUrl.startsWith('https://meet.google.com');
+// }
 
-function handleMeetLink(meetUrl) {
-    if (containsCurrentMeetLink(meetUrl)) {
-        const authStartIndex = meetUrl.indexOf('authuser');
-        const authEndIndex = authStartIndex + 10;
+// function handleMeetLink(meetUrl) {
+//     if (containsCurrentMeetLink(meetUrl)) {
+//         const authStartIndex = meetUrl.indexOf('authuser');
+//         const authEndIndex = authStartIndex + 10;
 
-        //Get what's before authLink
-        const beforeAuthLink = meetUrl.split("").slice(0, authStartIndex).join("");
-        //Get authlink
-        let authLink = meetUrl.split("").slice(authStartIndex, authEndIndex).join("");
+//         //Get what's before authLink
+//         const beforeAuthLink = meetUrl.split("").slice(0, authStartIndex).join("");
+//         //Get authlink
+//         let authLink = meetUrl.split("").slice(authStartIndex, authEndIndex).join("");
 
-        if (authLink === specifiedAuthLink) {
-            console.log(`no auth Link change`)
+//         if (authLink === specifiedAuthLink) {
+//             console.log(`no auth Link change`)
 
-        } else {
-            authLink = specifiedAuthLink;
-            console.log('auth link change');
-        }
+//         } else {
+//             authLink = specifiedAuthLink;
+//             console.log('auth link change');
+//         }
 
-        const newMeetUrl = beforeAuthLink.concat(authLink);
-        console.log(newMeetUrl);
+//         const newMeetUrl = beforeAuthLink.concat(authLink);
+//         console.log(newMeetUrl);
 
-        // console.log(authLink[authLink.length - 1])
+//         // console.log(authLink[authLink.length - 1])
+//     } else {
+//         console.log('Meet Link Not Detected')
+//     }
+// }
+
+// handleMeetLink(currentMeetLink)
+
+
+
+const meetUrl1 = 'https://meet.google.com/pbx-wmab-hij';
+const meetUrl2 = 'https://meet.google.com/pbx-wmab-hij?authuser=1';
+const meetUrl3 = 'https://meet.google.com/pbx-wmab-hij?authuser=1&hs=122&ijlm=1609727277478';
+const meetUrl4 = 'https://meet.google.com/pbx-wmab-hij?authuser=1&hs=122';
+
+const userSpecifiedAuthLink = '?authuser=1'
+
+function switchUser(meetUrl) {
+    const authStartIndex = meetUrl.indexOf("?authuser");
+    let newMeetUrl = '';
+
+    if (authStartIndex !== -1) {
+        const beforeAuthLink = meetUrl
+        .split("")
+        .slice(0, authStartIndex)
+        .join("");
+        
+        newMeetUrl = beforeAuthLink.concat(userSpecifiedAuthLink);
     } else {
-        console.log('Meet Link Not Detected')
+        newMeetUrl = meetUrl.concat(userSpecifiedAuthLink)
     }
+  
+    return newMeetUrl;
 }
 
-handleMeetLink(currentMeetLink)
+console.log(switchUser(meetUrl1));
+console.log(switchUser(meetUrl2));
+console.log(switchUser(meetUrl3));
+console.log(switchUser(meetUrl4));

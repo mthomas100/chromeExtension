@@ -16,26 +16,22 @@ function printCurrentTab() {
   };
 }
 
+const userSpecifiedAuthLink = '?authuser=1'
+
 function switchUser(meetUrl) {
-  const authStartIndex = meetUrl.indexOf("authuser");
-  const authEndIndex = authStartIndex + 10;
+    const authStartIndex = meetUrl.indexOf("?authuser");
+    let newMeetUrl = '';
 
-  //Get what's before authLink
-  const beforeAuthLink = meetUrl
-    .split("")
-    .slice(0, authStartIndex)
-    .join("");
-  //Get authlink
-  let authLink = meetUrl
-    .split("")
-    .slice(authStartIndex, authEndIndex)
-    .join("");
-
-  if (authLink == "authuser=1") {
-    authLink = "authuser=0";
-  } else authLink = "authuser=1";
-
-  const newMeetUrl = beforeAuthLink.concat('?').concat(authLink);
-
-  return newMeetUrl;
+    if (authStartIndex !== -1) {
+        const beforeAuthLink = meetUrl
+        .split("")
+        .slice(0, authStartIndex)
+        .join("");
+        
+        newMeetUrl = beforeAuthLink.concat(userSpecifiedAuthLink);
+    } else {
+        newMeetUrl = meetUrl.concat(userSpecifiedAuthLink)
+    }
+  
+    return newMeetUrl;
 }
