@@ -1,5 +1,6 @@
 chrome.contextMenus.create({
   title: "Switch Google Account",
+  documentUrlPatterns: ['*://meet.google.com/*'],
   onclick: printCurrentTab()
 });
 
