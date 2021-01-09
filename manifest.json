@@ -3,7 +3,7 @@
   "name": "Google Account Switcher",
   "version": "1.0",
   "description": "Quickly switch between Google accounts.",
-  "permissions": ["contextMenus", "tabs"],
+  "permissions": ["contextMenus", "tabs", "webRequest", "<all_urls>"],
   "background": {
     "scripts": ["js/background.js"]
   },
