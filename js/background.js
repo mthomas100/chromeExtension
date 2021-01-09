@@ -13,9 +13,9 @@ chrome.webRequest.onBeforeRequest.addListener(
 
       console.log({initiator, url, tabId, meetId});
       
-      if (initiator === 'https://meet.google.com' || initiator === 'https://calendar.google.com' && meetId) {
+      if ((initiator === 'https://meet.google.com' || initiator === 'https://calendar.google.com') && meetId) {
         chrome.tabs.update(tabId, {url : switchUser(`https://meet.google.com/${meetId}`)})
-        console.log(`redirect occured with initiator page of ${initiator}`);
+        console.log(`redirect occured with initiator page of ${initiator} and meetId of ${meetId}`);
       }
   },
   {urls: ['*://meet.google.com/*', '*://calendar.google.com/*'], types: ['main_frame']},
