@@ -4,14 +4,6 @@ chrome.contextMenus.create({
   onclick: printCurrentTab()
 });
 
-// chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-//   const status = changeInfo.status;
-//   const url = tab.url;
-//   if (url.startsWith("https://meet.google.com") && status == "loading") {
-//       chrome.tabs.update(tabId, {url: switchUser(url)});
-//   }
-// });
-
 chrome.webRequest.onBeforeRequest.addListener(
   function(details) {
       const tabId = details.tabId;
