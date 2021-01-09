@@ -13,12 +13,12 @@ chrome.webRequest.onBeforeRequest.addListener(
 
       console.log({initiator, url, tabId, meetId});
       
-      if (initiator === 'https://meet.google.com' && meetId) {
+      if (initiator === 'https://meet.google.com' || initiator === 'https://calendar.google.com' && meetId) {
         chrome.tabs.update(tabId, {url : switchUser(`https://meet.google.com/${meetId}`)})
         console.log(`redirect occured with initiator page of ${initiator}`);
       }
   },
-  {urls: ['*://meet.google.com/*'], types: ['main_frame']},
+  {urls: ['*://meet.google.com/*', '*://calendar.google.com/*'], types: ['main_frame']},
 );
 
 function printCurrentTab() {
