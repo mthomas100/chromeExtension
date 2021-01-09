@@ -11,7 +11,7 @@ chrome.webRequest.onBeforeRequest.addListener(
       const url = details.url;
       const meetId = url.match(/[a-z]{3}[-][a-z]{4}[-][a-z]{3}/gi)
 
-      console.log({initiator, url, tabId});
+      console.log({initiator, url, tabId, meetId});
       
       if (initiator === 'https://meet.google.com' && meetId) {
         chrome.tabs.update(tabId, {url : switchUser(`https://meet.google.com/${meetId}`)})
