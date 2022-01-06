@@ -2,7 +2,7 @@
 This extension is for people who have multiple google accounts but always need their google meets links to load using the correct account. When enabled, this extension makes sure google meets links are always accessed using the correct google account. 
 
 
-### Instructions for running, per google documentation:
+### Instructions for running (from [google documentation](https://support.google.com/chrome/a/answer/2714278?hl=en))
 
 1) Save the app or extension folder on your test device.
 2) Go to chrome://extensions/. 
